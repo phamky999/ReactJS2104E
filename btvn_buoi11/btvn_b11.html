@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="" id="form-1">
+        <div class="form-group">
+            <p id="clock">Start</p>
+            <button type="button" id="btnStart">Start</button>
+            <button type="button" id="btnStop">Stop</button>
+        </div>
+    </form>
+    <script>
+        class Clock {
+            constructor() {
+
+            }
+            start() {
+                return this.render();
+            }
+            stop(interval) {
+                clearInterval(interval);
+            }
+            render() {
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                if (hours < 10)
+                    hours = '0' + hours;
+                if (minutes < 10)
+                    minutes = '0' + minutes;
+                if (seconds < 10)
+                    seconds = '0' + seconds;
+
+                return `${hours}:${minutes}:${seconds} AM`;
+
+            }
+
+        }
+
+        let myClock = new Clock();
+
+        let interval;
+
+        document.getElementById("btnStart").addEventListener("click", 
+        function () {
+            interval = setInterval(() =>  document.getElementById("clock").innerHTML = myClock.start() , 1000);
+        });
+
+        document.getElementById("btnStop").addEventListener("click",
+        function(){
+            myClock.stop(interval)
+        });
+    </script>
+</body>
+
+</html>

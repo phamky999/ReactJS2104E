@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Bai 1:
+        class Family{
+            static plant = "eats something";
+            constructor(name,speed){
+                this.name = name;
+                this.speed = speed;
+            }
+            run(speed = 0){
+                this.speed += speed;
+                alert(`${this.name} run ${this.speed}`);
+            }
+            static compare(familyOne,familyTwo){
+                return familyOne.speed - familyTwo.speed;
+            }
+        }
+        class Julia extends Family{
+            hidden(){
+                alert(`${this.name} is hiddens`);
+            }
+        }
+
+        let julias = [
+            new Julia("is Julia",10),
+            new Julia("isn't Julia",5)
+        ]
+
+        julias.sort(Julia.compare); //?  em không hiểu cái này chạy như thế nào.
+        julias[0].run(); //? 5 , vì sort: sắp xếp và trả lại mảng đã sắp xếp
+        Julia.plant; //? "eats something" : static member variable
+        
+        
+        
+        //Bai 2
+
+        // function fetchScript(src,callback){
+        //     let script = document.createElement('script');
+        //     script.src = src;
+        //     script.onload = ()=> callback(script);
+        //     document.head.append(script);
+        // }
+
+        // fetchScript("https://code.jquery.com/jquery-3.6.0.slim.js",function(script){
+        //     console.log(script);
+        // })
+
+        
+        let myPromise = new Promise(function(r,rj){
+            //do something to get Src
+            let myJob = 'https://code.jquery.com/jquery-3.6.0.slim.js';
+            (myJob !== undefined) ? r(myJob) : rj('An unknown error :D');
+        });
+        myPromise
+        .then(function(srcAttri){
+            let script = document.createElement('script');
+            script.src = srcAttri;
+            document.head.append(script);
+            console.log(script);
+        })
+        .catch(function(data){
+            console.log("Error: " + data);
+        })
+
+    </script>
+</body>
+</html>
